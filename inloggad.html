@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sverigeguiden</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="css/bootstrap-social.css">
+<link type="text/css" rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+<link type="text/css" href="css/bootstrap-switch.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<style>
+
+body {
+	background-color: #5bc0de;
+}
+
+
+.navbar, .navbar-default {
+	background-color: black;
+}
+
+.navbar .divider-vertical {
+    height: 50px;
+    margin: 0 9px;
+    border-right: 1px solid #ffffff;
+    border-left: 1px solid #f2f2f2;
+}
+
+.navbar-inverse .divider-vertical {
+    border-right-color: #222222;
+    border-left-color: #111111;
+}
+
+.jumbotron {
+	background-color: rgba(255, 255, 255, 0.7);
+}
+</style>			  
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+           	<span style="font-weight: bold"id="current" class="navbar-brand">Hem</span>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav">
+                <li><a href="#Hem">Hem</a></li>
+                <li><a href="#Turista">Turista</a></li>
+                <li><a href="#Motionera">Motionera</a></li>
+                <li><a href="#Quiz">Quiz</a></li>
+                <li><a href="#Belöningar">Belöningar</a></li>
+                <li><a href="#Statistik">Statistik</a></li>
+                <li><a href="#Sök">Sök</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div style="height: 50px"></div>
+<div style="margin-top: 20px;" class="container" id="main">
+	
+</div>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-switch.js"></script>
+<script>
+var pages = {};
+pages['#Hem'] = '<div class="jumbotron">\
+		<div class="row">\
+			<div class="col-xs-6 col-sm-6 col-md-3 text-center">\
+				<a href="#Turista">\
+					<h3>Turista</h3>\
+					<img src="images/sevärdhet.jpg"  height="200" width="200" alt="Vasa" class="img-thumbnail">\
+				</a>\
+			</div>\
+			<div class="col-xs-6 col-sm-6 col-md-3 text-center">\
+				<a href="#Motionera">\
+					<h3>Motionera</h3>\
+					<img src="images/motion.jpg" height="200" width="200" alt="Vasa" class="img-thumbnail">\
+				</a>\
+			</div>\
+			<div class="col-xs-6 col-sm-6 col-md-3 text-center">\
+				<a href="#Quiz">\
+					<h3>Quiz</h3>\
+					<img src="images/brain.jpg" height="200" width="200" alt="Vasa" class="img-thumbnail">\
+				</a>\
+			</div>\
+			<div class="col-xs-6 col-sm-6 col-md-3 text-center">\
+				<a href="#Belöningar">\
+					<h3>Belöningar</h3>\
+					<img src="images/kaffe.jpg" height="200" width="200" alt="Vasa" class="img-thumbnail">\
+				</a>\
+			</div>\
+			<div class="col-xs-6 col-sm-6 col-md-3 text-center">\
+				<a href="#Statistik">\
+					<h3>Statistik</h3>\
+					<img src="images/stat2.jpg" height="200" width="200" alt="Vasa" class="img-thumbnail">\
+				</a>\
+			</div>\
+			<div class="col-xs-6 col-sm-6 col-md-3 text-center">\
+				<a href="#Sök">\
+					<h3>Sök</h3>\
+					<img src="images/sök.jpg" height="200" width="200" alt="Vasa" class="img-thumbnail">\
+				</a>\
+			</div>\
+		</div>\
+	</div>';
+pages['#Turista'] = "asdf";
+pages['#Karta'] = '<div style="padding-top: 7px; padding-bottom: 3px;"class="jumbotron">\
+		<div class="row">\
+			<div class="col-xs-4">\
+				<h5 class="text-center" style="margin-bottom:5px">Tid</h5>\
+				<h2 class="text-center" style="margin-top:0; font-weight: bold">52:43</h2>\
+			</div>\
+			<div class="col-xs-4">\
+				<h5 class="text-center" style="margin-bottom:5px">Hastighet (min/km)</h5>\
+				<h2 class="text-center" style="margin-top:0; font-weight: bold">52:43</h2>\
+			</div>\
+			<div class="col-xs-4">\
+				<h5 class="text-center" style="margin-bottom:5px">Kalorier</h5>\
+				<h2 class="text-center" style="margin-top:0; font-weight: bold">469</h2>\
+			</div>\
+		</div>\
+	</div>\
+	<a href="#Kyrka">\
+		<img src="images/map.png" alt="Vasa" class="img-responsive img-rounded center-block">\
+	</a>';
+pages['#Motionera'] = '<div class="jumbotron">\
+		<form class="form-horizontal">\
+			<div class="form-group">\
+				<label for="dist" class="col-xs-2 control-label">Distans</label>\
+				<div class="col-xs-7">\
+					<select id="dist" class="form-control">\
+							<option>1-2 km</option>\
+							<option>3-4 km</option>\
+							<option>5-7 km</option>\
+							<option>&gt;7 km</option>\
+					</select>\
+				</div>\
+				<div class="col-xs-3">\
+					 <input type="checkbox" name="checkbox1" checked>\
+				</div>\
+			</div>\
+			<div class="form-group">\
+				<label for="road" class="col-xs-2 control-label">Underlag</label>\
+				<div class="col-xs-7">\
+					<select id="road" class="form-control">\
+							<option>Asfalt</option>\
+							<option>Gräs</option>\
+							<option>Väg</option>\
+							<option>Skog</option>\
+					</select>\
+				</div>\
+				<div class="col-xs-3">\
+					 <input type="checkbox" name="checkbox1" checked>\
+				</div>\
+			</div>\
+			<div class="form-group">\
+				<label for="road" class="col-xs-2 control-label">Sevärdhetsläge</label>\
+				<div class="col-xs-3 col-xs-offset-7">\
+					 <input type="checkbox" name="checkbox1" checked>\
+				</div>\
+			</div>\
+			<div class="form-group">\
+				<label for="road" class="col-xs-2 control-label">Inga besökta sevärdheter</label>\
+				<div class="col-xs-3 col-xs-offset-7">\
+					 <input type="checkbox" name="checkbox1">\
+				</div>\
+			</div>\
+		</form>\
+		<hr>\
+		<h2 class="text-center">Sevärdheter - 3</h2>\
+		<div class="row">\
+			<div class="col-xs-4">\
+				<h4 class="text-center">Gamla Linköping</h4>\
+				<img src="images/gamlalinköping.jpg" height="200" width="200" alt="Vasa" class="img-thumbnail center-block">\
+			</div>\
+			<div class="col-xs-4">\
+				<h4 class="text-center">Linköpings domkyrka</h4>\
+				<img src="images/domkyrka.jpg" height="200" width="200" alt="Vasa" class="img-thumbnail center-block">\
+			</div>\
+			<div class="col-xs-4">\
+				<h4 class="text-center">Stångån</h4>\
+				<img src="images/stångån.jpg" height="200" width="200" alt="Vasa" class="img-thumbnail center-block">\
+			</div>\
+		</div>\
+		<br>\
+		<div class="row">\
+			<div class="col-xs-4 col-xs-offset-4" style="text-align: center;">\
+				<a href="#Karta" class="btn btn-success btn-lg center-block">Kör</a>\
+			</div>\
+		</div>\
+	</div>';
+pages['#Kyrka'] = '<div class="jumbotron">\
+		<div class="row">\
+			<div class="col-xs-3">\
+				<img src="images/domkyrka.jpg" height="120" width="120" alt="Vasa" class="img-thumbnail center-block">\
+			</div>\
+			<div class="col-xs-9">\
+				<h2 style="display: inline-block;">Linköpings domkyrka</h2>\
+				<a style="margin-left: 20px;margin-top: -10px;"class="btn btn-success" href="#Quiz">Ta Quiz</a>\
+			</div>\
+		</div>\
+		<hr>\
+		<p>\
+		Linköpings domkyrka är en kyrkobyggnad och domkyrka i Linköpings domkyrkoförsamling i Linköping i Östergötland. \
+		Kyrkan byggdes 1973 av den kände filmregissören Steven Spielberg.\
+		Byggnaden är är känd för att vara sittplats för STABEN under Nolle-P.\
+		</p>\
+		<p>\
+		Sedan 2005 har byggnaden brunnit ned ett flertal gånger, närmare besämt 4, då våldsamma folkmassor under Pride-festivaler har spårat. På grund av detta så har kyrkan utvecklat\
+		ett självförsvarssystem som består av flera olika slags kanoner, 5 SWAT-teams och 2 atombomber.\
+		</p>\
+	</div>';
+pages['#Quiz'] = '<div class="jumbotron">\
+		<h2 style="font-weight: bold" class="text-center">Fråga: När byggdes domkyrkan?</h2>\
+		<div class="row">\
+			<div class="col-xs-4 text-center">\
+				<span style="color:red;" class="fa fa-arrow-left fa-4x"></span>\
+			</div>\
+			<div class="col-xs-4 text-center">\
+				<h2 style="font-weight: bold">1/5</h2>\
+			</div>\
+			<div class="col-xs-4 text-center">\
+				<span style="color:green;" class="fa fa-arrow-right fa-4x"></span>\
+			</div>\
+		</div>\
+		<br>\
+		<div class="row">\
+			<div class="col-xs-10 col-xs-offset-1">\
+				<a href="" class="btn btn-default btn-block btn-lg">1973</a>\
+			</div>\
+		</div>\
+		<br>\
+		<div class="row">\
+			<div class="col-xs-10 col-xs-offset-1">\
+				<a href="" class="btn btn-default btn-block btn-lg">1977</a>\
+			</div>\
+		</div>\
+		<br>\
+		<div class="row">\
+			<div class="col-xs-10 col-xs-offset-1">\
+				<a href="" class="btn btn-default btn-block btn-lg">1971</a>\
+			</div>\
+		</div>\
+		<br>\
+		<div class="row">\
+			<div class="col-xs-10 col-xs-offset-1">\
+				<a href="" class="btn btn-default btn-block btn-lg">1975</a>\
+			</div>\
+		</div>\
+	</div>';
+
+pages['#Statistik'] = '<div class="jumbotron">\
+		<div class="btn-group btn-group-md btn-group-justified">\
+			<a class="btn btn-primary">Topplistor</a>\
+			<a class="btn btn-default">Sevärdheter</a>\
+			<a class="btn btn-default">Motion</a>\
+			<a class="btn btn-default">Städer</a>\
+		</div>\
+		<hr style="margin-bottom: 10px;">\
+		<div class="row">\
+			<div class="col-xs-9">\
+				<h4>Nationell topplista</h4>\
+			</div>\
+			<div class="col-xs-3">\
+				<input type="checkbox" name="checkbox1" checked>\
+			</div>\
+		</div>\
+		<table style="margin-top: 6px;"class="table">\
+			<tr>\
+				<td style="width: 5%">1.</td>\
+				<td style="width: 8%"><img src="images/jesperh.jpg" width="30" height="30"></td>\
+				<td style="width: 55%">Jesper Holmström</td>\
+				<td style="width: 5%">-</td>\
+				<td>23 642p</td>\
+			</tr>\
+			<tr>\
+				<td style="width: 5%">2.</td>\
+				<td style="width: 8%"><img src="images/victorn.jpg" width="30" height="30"></td>\
+				<td style="width: 55%">Victor Nyberg</td>\
+				<td style="width: 5%">-</td>\
+				<td>23 641p</td>\
+			</tr>\
+			<tr>\
+				<td style="width: 5%">3.</td>\
+				<td style="width: 8%"><img src="images/linneal.jpg" width="30" height="30"></td>\
+				<td style="width: 55%">Linnea Lundström </td>\
+				<td style="width: 5%">-</td>\
+				<td>22 321p</td>\
+			</tr>\
+			<tr>\
+				<td style="width: 5%">4.</td>\
+				<td style="width: 8%"><img src="images/jesperw.jpg" width="30" height="30"></td>\
+				<td style="width: 55%">Jesper Wrang</td>\
+				<td style="width: 5%">-</td>\
+				<td>19 894p</td>\
+			</tr>\
+			<tr>\
+				<td style="width: 5%">5.</td>\
+				<td style="width: 8%"><img src="images/ludvigs.jpg" width="30" height="30"></td>\
+				<td style="width: 55%">Ludvig Sjungargård</td>\
+				<td style="width: 5%">-</td>\
+				<td>19 769p</td>\
+			</tr>\
+			<tr>\
+				<td style="width: 5%">6.</td>\
+				<td style="width: 8%"><img src="images/villiamr.jpg" width="30" height="30"></td>\
+				<td style="width: 55%">Villiam Rydfalk</td>\
+				<td style="width: 5%">-</td>\
+				<td>16 751p</td>\
+			</tr>\
+			<tr>\
+				<td style="width: 5%">7.</td>\
+				<td style="width: 8%"><img src="images/jensj.png" width="30" height="30"></td>\
+				<td style="width: 55%">Jens Johansson</td>\
+				<td style="width: 5%">-</td>\
+				<td>16 739p</td>\
+			</tr>\
+			<tr>\
+				<td style="width: 5%">8.</td>\
+				<td style="width: 8%"><img src="images/anettel.png" width="30" height="30"></td>\
+				<td style="width: 55%">Anette Larsson</td>\
+				<td style="width: 5%">-</td>\
+				<td>16 721p</td>\
+			</tr>\
+			<tr>\
+				<td style="width: 5%">...</td>\
+				<td style="width: 8%"></td>\
+				<td style="width: 55%"></td>\
+				<td style="width: 5%"></td>\
+				<td></td>\
+			</tr>\
+			<tr>\
+				<td style="width: 5%">465.</td>\
+				<td style="width: 8%"><img src="images/robine.jpg" width="30" height="30"></td>\
+				<td style="width: 55%">Robin Ellgren</td>\
+				<td style="width: 5%">-</td>\
+				<td>1337p</td>\
+			</tr>\
+		</table>\
+	</div>';
+pages['#Sök'] = '';
+pages['#Belöningar'] = '';
+
+function handlePage(str) {
+	if(str !== undefined) {
+		$('#main').html(pages[str]);
+		$('#current').html(str.substring(1));
+
+		if(str === '#Motionera' || str === '#Statistik') {
+			$("[name='checkbox1']").bootstrapSwitch();
+		}
+	}
+}
+
+$( document ).ready(function() {
+	$.fn.bootstrapSwitch.defaults.onText = "På";
+	$.fn.bootstrapSwitch.defaults.offText = "Av";
+
+	$("[name='checkbox1']").bootstrapSwitch();
+	var url = window.location.href;
+	
+	if(url.indexOf('#') !== -1) {
+		var page = url.substring(url.indexOf("#"));
+		handlePage(page);
+	} else {
+		handlePage("#Hem");
+	}
+
+	$('body').on('click','a', function(e) {
+		var href = $(this).attr('href');
+		handlePage(href);
+			
+	});
+});
+</script>
+</body>
+</html>
