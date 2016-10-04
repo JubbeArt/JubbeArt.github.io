@@ -450,10 +450,12 @@ $( document ).ready(function() {
 	window.onpopstate = function(event)
 	{ 
 		var url = document.location.href;
-		var page = url.substring(url.indexOf('#'));
+		if(url.indexOf('#') != -1) {
+			var page = url.substring(url.indexOf('#'));
 
-		if(page != currentPage) {
-			handlePage(page);
+			if(page != currentPage) {
+				handlePage(page);
+			}
 		}	  
 	}
 
