@@ -180,18 +180,18 @@ pages['#Motionera'] = '<div class="jumbotron">\
 			<div class="form-group">\
 				<label for="road" style="text-align:left;" class="col-xs-4 col-sm-offset-1 col-lg-offset-2 control-label">Sevärdhetsläge</label>\
 				<div class="col-xs-4 col-xs-offset-4 col-sm-offset-3 col-lg-offset-2">\
-					 <input type="checkbox" name="checkbox1" checked>\
+					 <input type="checkbox" name="checkbox2" checked>\
 				</div>\
 			</div>\
 			<div class="form-group">\
 				<label for="road" style="text-align:left;" class="col-xs-4 col-sm-offset-1 col-lg-offset-2 control-label">Inga besökta sevärdheter</label>\
 				<div class="col-xs-4 col-xs-offset-4 col-sm-offset-3 col-lg-offset-2">\
-					 <input type="checkbox" name="checkbox1">\
+					 <input type="checkbox" name="checkbox3">\
 				</div>\
 			</div>\
 		</form>\
 		<hr>\
-		<h2 class="text-center">Sevärdheter - 3</h2>\
+		<h2 class="text-center">Välj sevärdheter</h2>\
 		<div class="row">\
 			<div class="col-xs-4">\
 				<h4 class="text-center">Gamla Linköping</h4>\
@@ -205,13 +205,19 @@ pages['#Motionera'] = '<div class="jumbotron">\
 		</div>\
 		<div class="row">\
 			<div class="col-xs-4">\
-				<img src="images/gamlalinköping.jpg" height="200" width="200" alt="Vasa" class="img-thumbnail center-block">\
+				<a name="pic1">\
+					<img id="pic1" src="images/gamlalinköping.jpg" height="200" width="200" alt="Vasa" class="img-thumbnail center-block">\
+				</a>\
 			</div>\
 			<div class="col-xs-4">\
-				<img src="images/domkyrka.jpg" height="200" width="200" alt="Vasa" class="img-thumbnail center-block">\
+				<a name="pic2">\
+					<img id="pic2" src="images/domkyrka.jpg" height="200" width="200" alt="Vasa" class="img-thumbnail center-block">\
+				</a>\
 			</div>\
 			<div class="col-xs-4">\
-				<img src="images/stångån.jpg" height="200" width="200" alt="Vasa" class="img-thumbnail center-block">\
+				<a name="pic3">\
+				<img id="pic3" src="images/stångån.jpg" height="200" width="200" alt="Vasa" class="img-thumbnail center-block">\
+				</a>\
 			</div>\
 		</div>\
 		<br>\
@@ -391,16 +397,29 @@ pages['#Belöningar'] = '<div class="jumbotron">\
 		<h3 class="text-center">Under konstruktion</3>\
 	</div>';
 
+var currentPage = '';
+
 function handlePage(str) {
 	if(str !== undefined) {
 		$('#main').html(pages[str]);
 		$('#current').html(str.substring(1));
+		currentPage = str;
 
-		if(str === '#Motionera' || str === '#Statistik') {
+		if(str === '#Motionera') {
+			$("[name='checkbox1']").bootstrapSwitch();
+			$("[name='checkbox2']").bootstrapSwitch();
+			$("[name='checkbox3']").bootstrapSwitch();
+
+			$('input[name="checkbox2"]').on('switchChange.bootstrapSwitch', function(event, state) {
+					$('input[name="checkbox3"]').bootstrapSwitch('toggleDisabled', state, true);
+			});
+		} else if(str === '#Statistik') {
 			$("[name='checkbox1']").bootstrapSwitch();
 		}
 	}
 }
+
+
 
 $( document ).ready(function() {
 	$.fn.bootstrapSwitch.defaults.onText = "På";
@@ -418,21 +437,26 @@ $( document ).ready(function() {
 
 	$('body').on('click','a', function(e) {
 		var href = $(this).attr('href');
-		handlePage(href);
-			
+		var name = $(this).attr('name');	
+
+		if(pages[href]) {
+			handlePage(href);
+		} else if(name.includes('pic')) {
+			var color =	$('#' + name).css('background-color') == 'rgb(92, 184, 92)' ? '#fff' : '#5cb85c';
+			$('#' + name).css('background-color', color);
+		}
 	});
 
+	window.onpopstate = function(event)
+	{ 
+		var url = document.location.href;
+		var page = url.substring(url.indexOf('#'));
 
-	$(window).on("navigate", function (event, data) {
-		alert("bakc bitch");
-		var direction = data.state.direction;
-  		if (direction == 'back') {
-    		
-  		}
-  	});
-  /*if (direction == 'forward') {
-    // do something else
-  }*/
+		if(page != currentPage) {
+			handlePage(page);
+		}	  
+	}
+
 
 });
 </script>
