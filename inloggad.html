@@ -389,21 +389,37 @@ pages['#Statistik'] = '<div class="jumbotron">\
 pages['#Belöningar'] = '<div class="jumbotron">\
 		<h3 class="text-center">Belöningar nära dig</h3>\
 		<table style="margin-top: 6px;"class="table">\
-			<tr>\
-				<td style="width: 5%">1.</td>\
-				<td style="width: 8%"><img src="images/jesperh.jpg" width="30" height="30"></td>\
-				<td style="width: 55%">Jesper Holmström</td>\
-				<td style="width: 5%">-</td>\
-				<td>23 642p</td>\
+		<tr>\
+				<th style="font-weight:bold;"></th>\
+				<th ><h4 style="font-weight:bold;">Ställe</h4></th>\
+				<th><h4 style="font-weight:bold;">Erbjudande</h4></th>\
+				<th><h4 style="font-weight:bold;">Poäng</h4></th>\
 			</tr>\
+			<tr>\
+				<td><img src="images/baljan.png" width="80" height="80"></td>\
+				<td><h4>Sektionscafé Baljan</h4></td>\
+				<td><h4>2 kaffe för 1</h4></td>\
+				<td><a href="#Kaffe" class="btn btn-success btn-lg">230p</a></td>\
+			</tr>\
+			<tr>\
+				<td><img src="images/java.png" width="80" height="80"></td>\
+				<td><h4>Kaffebaren Java</h4></td>\
+				<td><h4>Gratis lunch</h4></td>\
+				<td><a href="#Belöningar" class="btn btn-danger btn-lg">2000p</a></td>\
+			</tr>\
+			<tr>\
 		</table>\
-		<h3 class="text-center">Under konstruktion</3>\
 	</div>';
 
 pages['#QuizKlart'] = '<div class="jumbotron">\
 	<h2 class="text-center">Grattis du klarade quiz för: Linköpings Domkyrka.</h2>\
 	<p class="text-center">Du har nu 230p, kolla hur du ligger till i topplistan <a href="#Statistik">här</a>.</p>\
 </div>'; 
+
+pages['#Kaffe'] = '<div class="jumbotron">\
+	<h2 class="text-center">Gott med kaffe!</h2>\
+	<img class="img-thumbnail center-block" src="images/kaffe2.jpg">\
+</div>';
 
 var currentPage = '';
 
