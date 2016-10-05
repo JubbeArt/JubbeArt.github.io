@@ -9,6 +9,7 @@
 <link type="text/css" rel="stylesheet" href="css/bootstrap-social.css">
 <link type="text/css" rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
 <link type="text/css" href="css/bootstrap-switch.min.css" rel="stylesheet">
+<meta name="mobile-web-app-capable" content="yes">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <style>
 
@@ -241,7 +242,7 @@ pages['#Kyrka'] = '<div style="padding-bottom: 50px;" class="jumbotron">\
 				<h3>Linköpings domkyrka</h3>\
 			</div>\
 			<div class="col-xs-4" >\
-				<a style="margin-top: 12px" class="btn btn-success btn-md" href="#Quiz">Ta Quiz (30p)</a>\
+				<a style="margin-top: 12px" class="btn btn-success btn-md pull-right" href="#Quiz">Ta Quiz (30p)</a>\
 			</div>\
 		</div>\
 		<hr>\
@@ -377,7 +378,7 @@ pages['#Statistik'] = '<div class="jumbotron">\
 				<td style="width: 5%"></td>\
 				<td></td>\
 			</tr>\
-			<tr>\
+			<tr> style="font-weight:bold"\
 				<td style="width: 5%">465.</td>\
 				<td style="width: 8%"><img src="images/anettel.png" width="30" height="30"></td>\
 				<td style="width: 55%">Anette Larsson</td>\
@@ -412,13 +413,22 @@ pages['#Belöningar'] = '<div class="jumbotron">\
 	</div>';
 
 pages['#QuizKlart'] = '<div class="jumbotron">\
-	<h2 class="text-center">Grattis du klarade quiz för: Linköpings Domkyrka.</h2>\
+	<h2 class="text-center">Grattis du klarade quiz för: Linköpings Domkyrka +30p.</h2>\
+	<hr>\
 	<p class="text-center">Du har nu 230p, kolla hur du ligger till i topplistan <a href="#Statistik">här</a>.</p>\
-</div>'; 
+</div>';
+
+pages['#QuizInteKlar'] = '<div class="jumbotron">\
+	<h2 class="text-center">Du klarade tyvärr inte quizen för: Linköpings Domkyrka.</h2>\
+	<h2 class="text-center" id="points"></h2>\
+	<hr>\
+	<a href="#Quiz" class="btn btn-success btn-block">Ta om quiz</a>\
+	<a href="#Kyrka" class="btn btn-success btn-block">Läs mer om: Linköpings Domkyrka</a>\
+</div>';
 
 pages['#Kaffe'] = '<div class="jumbotron">\
 	<h2 class="text-center">Gott med kaffe!</h2>\
-	<img class="img-thumbnail center-block" src="images/kaffe2.jpg">\
+	<img class="img-thumbnail center-block" src="images/qr.png">\
 </div>';
 
 var currentPage = '';
@@ -441,12 +451,17 @@ var right_answers = [
 	'4'
 ];
 
+var nr_of_rights = 0;
+
 function handlePage(str) {
 	if(str !== undefined) {
 		$('#main').html(pages[str]);
 		$('#current').html(str.substring(1));
 		currentPage = str;
 
+		if(str === '#Quiz') {
+			nr_of_rights = 0;
+		}
 		if(str === '#Motionera') {
 			$("[name='checkbox1']").bootstrapSwitch();
 			$("[name='checkbox2']").bootstrapSwitch();
@@ -457,9 +472,14 @@ function handlePage(str) {
 			});
 		} else if(str === '#Statistik') {
 			$("[name='checkbox1']").bootstrapSwitch();
+		} else if(str === '#QuizInteKlar') {
+			$('#points').html('Du fick: ' + nr_of_rights + '/3 rätt.');
+			nr_of_rights = 0;
 		}
 	}
 }
+
+
 
 $( document ).ready(function() {
 	$.fn.bootstrapSwitch.defaults.onText = "På";
@@ -505,11 +525,19 @@ $( document ).ready(function() {
 				que_nr = Number($('#que').attr('name'));
 				ans_nr = id.charAt(3);
 
+				//if(ans_nr == right_answers[que_nr - 1]) {
 				if(ans_nr == right_answers[que_nr - 1]) {
+					nr_of_rights+= 1;
+				}
+
 					que_nr += 1;
-					$(this).addClass('btn-success');
+					//$(this).addClass('btn-success');
+					
 					if(que_nr == 4) {
-						handlePage('#QuizKlart');
+						if(nr_of_rights == 3)
+							handlePage('#QuizKlart');
+						else
+							handlePage('#QuizInteKlar');
 					} else {
 						$('#que-time').html(que_nr + '/3');
 						$('#que').attr('name', que_nr);
@@ -517,17 +545,17 @@ $( document ).ready(function() {
 
 
 						for(var i = 0; i < 4; i++) {
-							$('#ans' + (i+1)).removeClass('btn-danger');
-							$('#ans' + (i+1)).removeClass('btn-success');
+							//$('#ans' + (i+1)).removeClass('btn-danger');
+							//$('#ans' + (i+1)).removeClass('btn-success');
 							$('#ans' + (i+1)).html(answers[que_nr - 1][i]);
 						}
 					}
 
 
-				} else {
+				/*} else {
 					$(this).addClass('btn-danger');
 					$(this).shake(3, 7, 400);
-				}
+				}*/
 			}
 		}
 	});
