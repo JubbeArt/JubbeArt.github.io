@@ -66,14 +66,16 @@ body {
 					</a>
 					<ul style="padding: 0;" class="dropdown-menu">
 						<li>
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Sök...">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button">
-										<span class="glyphicon glyphicon-search"></span>
-									</button>
-								</span>
-							</div>
+							<form class="form" id="sök">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Sök...">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">
+											<span class="glyphicon glyphicon-search"></span>
+										</button>
+									</span>
+								</div>
+							</form>
 						</li>
 					</ul>
 				</li>
@@ -387,7 +389,7 @@ pages['#Statistik'] = '<div class="jumbotron">\
 			</tr>\
 		</table>\
 	</div>';
-pages['#Belöningar'] = '<div class="jumbotron">\
+pages['#Belöningar'] = '<div class="jumbotron; overflow-y: scroll">\
 		<h3 class="text-center">Belöningar nära dig</h3>\
 		<table style="margin-top: 6px;"class="table">\
 		<tr>\
@@ -506,6 +508,10 @@ $( document ).ready(function() {
 	} else {
 		handlePage("#Hem");
 	}
+
+	$('#sök').on('submit', function(e){
+		e.preventDefault();
+	});
 
 	$('body').on('click','a', function(e) {
 		var href = $(this).attr('href');
